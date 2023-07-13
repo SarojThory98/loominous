@@ -1,0 +1,5 @@
+export const NOTIFICATION_TYPE_ENUM = {
+    ORDER_STATUS: 1,
+    NOTE_ADDED: 2,
+    NEW_ORDER_ADDED: 3,
+}
