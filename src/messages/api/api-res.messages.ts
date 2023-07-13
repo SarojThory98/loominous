@@ -7,7 +7,12 @@ export const API_MESSAGE = {
     FIELDS_INSERTED: 'Fields Inserted Successfully',
     UNAUTHORIZED: 'Unauthorized access',
     FORBIDDEN: 'Forbidden',
-    VALIDATION_ERROR: "Validation error in input data",
+    VALIDATION_ERROR: 'Validation error in input data',
+    SIGNUP: {
+        EMAIL: 'Email already exist',
+        NOT_VERIFIED: 'Email exist but not verified',
+        INCOMPLETE_PROFILE: 'User exist and incomplete profile',
+    },
     OTP: {
         OTP_EXPIRED: 'Otp Expired',
         RESEND_OTP_SUCCESSFULLY: 'OTP resent successfully',

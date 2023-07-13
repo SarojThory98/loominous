@@ -23,11 +23,11 @@ export const UserSchema: Schema = new Schema(
             enum: USER_TYPE_ENUM,
             default: USER_TYPE_ENUM.CUSTOMER,
         },
-        [USER_MODEL_KEYS.SIGNUP_FROM]: {
-            type: Number,
-            enum: SIGN_UP_ENUM,
-            required: true,
-        },
+        // [USER_MODEL_KEYS.SIGNUP_FROM]: {
+        //     type: Number,
+        //     enum: SIGN_UP_ENUM,
+        //     required: true,
+        // },
         [USER_MODEL_KEYS.RESET_PASSWORD_TOKEN]: {
             type: String,
             required: false,
