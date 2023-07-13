@@ -6,4 +6,7 @@ export const SERVICE_MESSAGE = {
         USER_CREATION_ERROR: 'error',
         USER_CREATION_SUCCESS: 'success',
     },
+    LOGIN: {
+        USER_NOT_EXIST: 'unregistered',
+    },
 }

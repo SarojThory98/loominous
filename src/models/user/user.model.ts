@@ -1,5 +1,4 @@
 import {USER_TYPE_ENUM} from '../../constants/models/Enums/userEnum'
-import {SIGN_UP_ENUM} from '../../constants/models/Enums/signUpEnums'
 import {USER_MODEL_KEYS} from '../../constants/models/user/user.model.key'
 import {Schema, Document, model} from 'mongoose'
 
@@ -23,11 +22,6 @@ export const UserSchema: Schema = new Schema(
             enum: USER_TYPE_ENUM,
             default: USER_TYPE_ENUM.CUSTOMER,
         },
-        // [USER_MODEL_KEYS.SIGNUP_FROM]: {
-        //     type: Number,
-        //     enum: SIGN_UP_ENUM,
-        //     required: true,
-        // },
         [USER_MODEL_KEYS.RESET_PASSWORD_TOKEN]: {
             type: String,
             required: false,

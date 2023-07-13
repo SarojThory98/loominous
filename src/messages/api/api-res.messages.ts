@@ -30,9 +30,10 @@ export const API_MESSAGE = {
         SUCCESS: 'Success',
     },
     AUTH: {
+        USER_NOT_EXIST: 'User does not exist',
         USER_ALREADY_EXIST: 'User Already Exists',
         USER_NOT_FOUND: 'User not found',
-        INVALID_CREDENTIALS: 'Invalid Email or Password',
+        INVALID_CREDENTIALS: 'Invalid Password',
         SIGNUP_SUCCESS: 'User account created successfully',
         LOGOUT: 'Logged out successfully',
         PASSWORD_UPDATED: 'Password updated successfully',
