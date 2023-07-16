@@ -12,6 +12,12 @@ export class UserAuthService {
                     message: SERVICE_MESSAGE.LOGIN.USER_NOT_EXIST,
                 }
             }
+            if (!emailExist.isVerified) {
+                return {
+                    status: false,
+                    message: SERVICE_MESSAGE.LOGIN.USER_NOT_VERIFIED,
+                }
+            }
             return {
                 status: true,
                 message: emailExist,

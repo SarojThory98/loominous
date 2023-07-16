@@ -4,6 +4,7 @@ export const CUSTOMER_MODEL_KEYS = {
     LAST_NAME: 'lastName',
     EMAIL: 'email',
     DOB: 'dob',
+    COUNTRY_CODE: 'countryCode',
     CONTACT_PREFIX: 'contactPrefix',
     CONTACT: 'contact',
     ADDRESS: 'address',

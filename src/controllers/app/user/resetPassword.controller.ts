@@ -2,17 +2,17 @@ import ApiResponse from '../../../utils/api/api-respnse-handler.utils'
 import {API_RES_CODE} from '../../../constants/api_res_code/api.res.code'
 import {API_MESSAGE} from '../../../messages/api/api-res.messages'
 import {Request, Response} from 'express'
-import {validateOTP} from '../../../validations/app/v1/user/userOTP.validation'
+import {validatePassword} from '../../../validations/app/v1/user/resetPassword.validation.'
 const API_RESPONSE = new ApiResponse()
 import {UserService} from '../../../services/app/user/index.user.service'
+const UserServices = new UserService()
 import {Types} from 'mongoose'
-import {OTP_MODEL_KEYS} from '../../../constants/models/otp/otp.model.key'
+import bcrypt from 'bcrypt'
 import {USER_MODEL_KEYS} from '../../../constants/models/user/user.model.key'
 
-const userOTP = new UserService()
-const verifyOTP = async (req: Request, res: Response) => {
+const resetPassword = async (req: Request, res: Response) => {
     try {
-        const validateResult = validateOTP(req.body)
+        const validateResult = validatePassword(req.body)
         if (validateResult && validateResult.error) {
             return API_RESPONSE.ErrorJsonResponse({
                 res,
@@ -21,27 +21,13 @@ const verifyOTP = async (req: Request, res: Response) => {
                 data: validateResult.error,
             })
         }
-        const result = await userOTP.verifyUserOTP({[OTP_MODEL_KEYS.USERID]: new Types.ObjectId(req.body.userId)})
-        if (!result.otp) {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        const result = await UserServices.updateSignupStatus({_id: new Types.ObjectId(req['user'].userId)}, {[USER_MODEL_KEYS.PASSWORD]: hashedPassword})
+        if (!result || !result.message) {
             return API_RESPONSE.ErrorJsonResponse({
                 res,
                 code: API_RES_CODE.INVALID_INPUT,
-                message: API_MESSAGE.OTP.OTP_EXPIRED,
-            })
-        }
-        if (result.otp !== req.body.otp) {
-            return API_RESPONSE.ErrorJsonResponse({
-                res,
-                code: API_RES_CODE.INVALID_INPUT,
-                message: API_MESSAGE.OTP.INVALID_OTP,
-            })
-        }
-        const updatedStatus = await userOTP.updateSignupStatus({_id: new Types.ObjectId(req.body.userId)}, {[USER_MODEL_KEYS.IS_VERIFIED]: 1})
-        if (!updatedStatus) {
-            return API_RESPONSE.ErrorJsonResponse({
-                res,
-                code: API_RES_CODE.INVALID_INPUT,
-                message: API_MESSAGE.USER.VERIFICATION_FAILED,
+                message: API_MESSAGE.PASSWORD.ERROR,
             })
         }
         return API_RESPONSE.SuccessJsonResponse({
@@ -59,4 +45,4 @@ const verifyOTP = async (req: Request, res: Response) => {
     }
 }
 
-export {verifyOTP}
+export {resetPassword}

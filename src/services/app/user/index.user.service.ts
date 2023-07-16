@@ -1,5 +1,6 @@
 import {ObjectInterface} from '../../../interfaces/common/object.interface'
-import {findUser, createUser} from '../../../utils/helper/query/user.query'
+import {findUser, createUser, findUserAndUpdate, countUser} from '../../../utils/helper/query/user.query'
+import {findUserList} from '../../../utils/helper/query/user.query'
 import bcrypt from 'bcrypt'
 import {SERVICE_MESSAGE} from '../../../messages/service/service.messages'
 import {createOTP, verifyOTP} from '../../../utils/helper/query/otp.query'
@@ -12,11 +13,6 @@ export class UserService {
         try {
             const email = body.email
             const emailExist = await findUser(email)
-            if (emailExist && !emailExist.isVerified) {
-                return {
-                    message: SERVICE_MESSAGE.SIGNUP.EXIST_EMAIL_NOT_VERIFIED,
-                }
-            }
             if (emailExist && emailExist.isVerified && emailExist.isProfileComplete) {
                 return {
                     message: SERVICE_MESSAGE.SIGNUP.EXIST_EMAIL,
@@ -25,6 +21,11 @@ export class UserService {
             if (emailExist && emailExist.isVerified && !emailExist.isProfileComplete) {
                 return {
                     message: SERVICE_MESSAGE.SIGNUP.INCOMPLETE_PROFILE,
+                }
+            }
+            if (emailExist) {
+                return {
+                    message: SERVICE_MESSAGE.SIGNUP.EXIST_EMAIL_NOT_VERIFIED,
                 }
             }
 
@@ -59,15 +60,72 @@ export class UserService {
         }
     }
 
-    public verifyUserOTP = async (body): Promise<ObjectInterface> => {
-        const OTPdata = verifyOTP({[OTP_MODEL_KEYS.USERID]: body.params.id})
-        if (OTPdata) {
-            return {
-                otp: (await OTPdata).otp,
+    public verifyUserOTP = async (userId): Promise<ObjectInterface> => {
+        try {
+            const OTPdata = verifyOTP(userId)
+            if (OTPdata) {
+                return {
+                    otp: (await OTPdata).otp,
+                }
             }
+            return {
+                otp: false,
+            }
+        } catch (error) {
+            console.log(error)
         }
-        return {
-            otp: false,
+    }
+
+    public updateSignupStatus = async (userId, update): Promise<ObjectInterface> => {
+        try {
+            const userExist = await findUserAndUpdate(userId, update)
+            if (userExist) {
+                return {
+                    message: true,
+                }
+            }
+            return {
+                message: false,
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    public updatePassword = async (userId, update): Promise<ObjectInterface> => {
+        try {
+            const userExist = await findUserAndUpdate(userId, update)
+            if (userExist) {
+                return {
+                    message: true,
+                }
+            }
+            return {
+                message: false,
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    public userList = async (pageNo, pageLimit): Promise<ObjectInterface> => {
+        try {
+            const skipPages = (pageNo - 1) * pageLimit
+            const userLists = await findUserList(skipPages, pageLimit)
+            const countAllUsers = await countUser()
+            if (userLists && userLists.length) {
+                return {
+                    message: {
+                        data: userLists,
+                        countUser: countAllUsers,
+                    },
+                }
+            }
+            return {
+                message: false,
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 }
