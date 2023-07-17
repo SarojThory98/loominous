@@ -3,22 +3,20 @@ import {API_RES_CODE} from '../../../constants/api_res_code/api.res.code'
 import {API_MESSAGE} from '../../../messages/api/api-res.messages'
 import {Request, Response} from 'express'
 const API_RESPONSE = new ApiResponse()
-import {UserService} from '../../../services/app/user/index.user.service'
-import {ProfileService} from '../../../services/app/user/userProfile.service'
-const ProfileServices = new ProfileService()
-const UserServices = new UserService()
+import {SupplierService} from '../../../services/app/supplier/supplier.service'
+const SupplierServices = new SupplierService()
 import {PAGINATION} from '../../../constants/models/pagination/pagination'
 import {Types} from 'mongoose'
-const getUserList = async (req: Request, res: Response) => {
+const getSupplierList = async (req: Request, res: Response) => {
     try {
         const {pageNo = PAGINATION.PAGE, pageLimit = PAGINATION.LIMIT} = req.query
-        const response = await UserServices.userList(pageNo, pageLimit)
+        const response = await SupplierServices.supplierList(pageNo, pageLimit)
 
         if (!response.message) {
             return API_RESPONSE.ErrorJsonResponse({
                 res,
                 code: API_RES_CODE.NO_CONTENT,
-                message: API_MESSAGE.USER.NO_USER_FOUND,
+                message: API_MESSAGE.SUPPLIER.NO_SUPPLIER_FOUND,
             })
         }
 
@@ -26,8 +24,9 @@ const getUserList = async (req: Request, res: Response) => {
             res,
             code: API_RES_CODE.SUCCESS,
             data: {
-                count: response.message.countUser,
-                usersData: response.message.data,
+                no: req.params,
+                count: response.message.countSupplier,
+                supplierData: response.message.data,
             },
         })
     } catch (error) {
@@ -40,15 +39,23 @@ const getUserList = async (req: Request, res: Response) => {
     }
 }
 
-const getUserProfile = async (req: Request, res: Response) => {
+const getSupplier = async (req: Request, res: Response) => {
     try {
-        const response = await ProfileServices.userProfile(new Types.ObjectId(req.params.id))
+        if (!req.params.id || req.params.id == ':id') {
+            return API_RESPONSE.ErrorJsonResponse({
+                res,
+                code: API_RES_CODE.INVALID_INPUT,
+                message: API_MESSAGE.VALIDATION_ERROR,
+                data: {data: API_MESSAGE.SUPPLIER.ID_REQUIRED},
+            })
+        }
+        const response = await SupplierServices.supplierData(new Types.ObjectId(req.params.id))
 
         if (!response.message) {
             return API_RESPONSE.ErrorJsonResponse({
                 res,
                 code: API_RES_CODE.NO_CONTENT,
-                message: API_MESSAGE.USER.NO_USER_FOUND,
+                message: API_MESSAGE.SUPPLIER.NO_SUPPLIER_FOUND,
             })
         }
 
@@ -67,4 +74,4 @@ const getUserProfile = async (req: Request, res: Response) => {
     }
 }
 
-export {getUserList, getUserProfile}
+export {getSupplierList, getSupplier}

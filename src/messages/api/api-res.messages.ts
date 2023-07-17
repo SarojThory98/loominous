@@ -63,6 +63,9 @@ export const API_MESSAGE = {
         SUPPLIER_CANNOT_BE_UPDATED: 'Supplier Cannot Be Updated',
         SUPPLIER_UPDATED_SUCCESSFULLY: 'Supplier Updated Successfully',
         SUPPLIER_NAME_IS_REQUIRED: 'Supplier Name Is Required',
+        ERROR: 'Supplier addition error',
+        NAME_REQUIRED: 'Supplier name is required',
+        ID_REQUIRED: 'Supplier id is required',
     },
     PRODUCT_TYPE: {
         PRODUCT_TYPE_NOT_ADDED: 'Product Type Not Added',

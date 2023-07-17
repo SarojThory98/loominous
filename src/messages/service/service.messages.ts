@@ -14,4 +14,9 @@ export const SERVICE_MESSAGE = {
         EXIST_PROFILE: 'exist',
         SUCCESS: 'added',
     },
+    SUPPLIER: {
+        ALREADY_EXIST: 'exist',
+        SUCCESS: 'success',
+        ERROR: 'error',
+    },
 }
