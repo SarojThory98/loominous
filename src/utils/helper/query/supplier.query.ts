@@ -1,4 +1,3 @@
-// import {SUPPLIER_MODEL_KEYS} from '../../../constants/models/supplier/supplier.model.key'
 import {SupplierSchemaModel, SupplierDocument} from '../../../models/supplier/index.supplier.model'
 const addSupplier = async (supplierObject = {}): Promise<SupplierDocument> => {
     try {
