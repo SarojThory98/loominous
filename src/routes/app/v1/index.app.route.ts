@@ -16,7 +16,7 @@ class AppV1Routes implements RouteInterface {
     }
     private AppV1Routes() {
         this.Router.use(this.Path, this.UserRoutes.Router)
-        // this.Router.use(this.Path, this.AdminRoutes.Router)
+        this.Router.use(this.Path, this.AdminRoutes.Router)
         this.Router.use(this.Path, this.AuthRoutes.Router)
     }
 }

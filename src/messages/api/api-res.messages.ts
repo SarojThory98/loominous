@@ -28,6 +28,13 @@ export const API_MESSAGE = {
         EMAIL_SENT_SUCCESSFULLY: 'Email Sent Successfully',
         RESET_PASSWORD_CLICK: 'Click Here',
         SUCCESS: 'Success',
+        ERROR: 'Password updation error',
+    },
+    PROFILE: {
+        ALREADY_EXIST: 'User profile alredy exist',
+        ERROR: 'Profile addition error',
+        SUCCESS: 'Profile successfully added',
+        UPDATE_ERROR: 'Profile updation error',
     },
     AUTH: {
         USER_NOT_EXIST: 'User does not exist',
@@ -43,6 +50,7 @@ export const API_MESSAGE = {
         TOKEN_NOT_EXISTS: 'Token does not exists',
         TOKEN_EXPIRED: 'Token expired',
         USER_UPDATE: 'User account updated successfully',
+        NOT_VERIFIED: 'User is not verified',
     },
     SUPPLIER: {
         SUPPLIER_NOT_ADDED: 'Supplier Not Added',
@@ -55,6 +63,9 @@ export const API_MESSAGE = {
         SUPPLIER_CANNOT_BE_UPDATED: 'Supplier Cannot Be Updated',
         SUPPLIER_UPDATED_SUCCESSFULLY: 'Supplier Updated Successfully',
         SUPPLIER_NAME_IS_REQUIRED: 'Supplier Name Is Required',
+        ERROR: 'Supplier addition error',
+        NAME_REQUIRED: 'Supplier name is required',
+        ID_REQUIRED: 'Supplier id is required',
     },
     PRODUCT_TYPE: {
         PRODUCT_TYPE_NOT_ADDED: 'Product Type Not Added',
@@ -112,6 +123,7 @@ export const API_MESSAGE = {
         USER_DELETED_SUCCESSFULLY: 'User Deleted Successfully ',
         USER_CANNOT_BE_DELETED: 'User Cannot Be Deleted',
         PENDING_ORDERS_FOUND: 'Pending Orders found',
+        VERIFICATION_FAILED: 'Failed to update user verification status',
     },
     TAG: {
         TAG_ADDED_SUCCESSFULLY: 'Tag Added Successfully',

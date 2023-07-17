@@ -8,5 +8,15 @@ export const SERVICE_MESSAGE = {
     },
     LOGIN: {
         USER_NOT_EXIST: 'unregistered',
+        USER_NOT_VERIFIED: 'unverified',
+    },
+    PROFILE: {
+        EXIST_PROFILE: 'exist',
+        SUCCESS: 'added',
+    },
+    SUPPLIER: {
+        ALREADY_EXIST: 'exist',
+        SUCCESS: 'success',
+        ERROR: 'error',
     },
 }

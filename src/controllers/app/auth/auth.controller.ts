@@ -31,34 +31,32 @@ const loginAdmin = async (req: Request, res: Response) => {
                 message: API_MESSAGE.AUTH.EMAIL_NOT_EXISTS,
             })
         }
-        if (result.status) {
-            bcrypt.compare(req.body.password, result.message.password, (err, result) => {
-                if (result) {
-                    const tokenConstant = {
-                        userId: result._id,
-                        email: result.email,
-                        type: result.type,
-                    }
 
-                    const token = jwt.sign(tokenConstant, process.env.JWT_SECRET, {
-                        expiresIn: process.env.JWT_EXPIRY,
-                    })
-                    return API_RESPONSE.SuccessJsonResponse({
-                        res,
-                        code: API_RES_CODE.SUCCESS,
-                        data: {
-                            token: token,
-                        },
-                    })
-                }
-
+        bcrypt.compare(req.body.password, result.message.password, (err, output) => {
+            if (err) {
                 return API_RESPONSE.ErrorJsonResponse({
                     res,
                     code: API_RES_CODE.NOT_FOUND,
                     message: API_MESSAGE.AUTH.INVALID_CREDENTIALS,
                 })
-            })
+            }
+        })
+        const tokenConstant = {
+            userId: result.message._id,
+            email: result.message.email,
+            type: result.message.type,
         }
+
+        const token = jwt.sign(tokenConstant, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRY,
+        })
+        return API_RESPONSE.SuccessJsonResponse({
+            res,
+            code: API_RES_CODE.SUCCESS,
+            data: {
+                token: token,
+            },
+        })
     } catch (error) {
         return API_RESPONSE.ErrorJsonResponse({
             res,
@@ -89,7 +87,7 @@ const loginCustomer = async (req: Request, res: Response) => {
             })
         }
         if (result.status) {
-            bcrypt.compare(req.body.password, result.message.password, (err, result) => {
+            bcrypt.compare(req.body.password, result.message.password, (err, output) => {
                 if (err) {
                     return API_RESPONSE.ErrorJsonResponse({
                         res,
@@ -111,9 +109,9 @@ const loginCustomer = async (req: Request, res: Response) => {
         }
 
         const tokenConstant = {
-            userId: result._id,
-            email: result.email,
-            type: result.type,
+            userId: result.message._id,
+            email: result.message.email,
+            type: result.message.type,
         }
 
         const token = jwt.sign(tokenConstant, process.env.JWT_SECRET, {
