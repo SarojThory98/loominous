@@ -78,6 +78,7 @@ export const API_MESSAGE = {
         PRODUCT_TYPE_UPDATED_SUCCESSFULLY: 'Product Type Updated Successfully',
         PRODUCT_TYPE_NOT_EXIST: 'Product Type Not Exist',
         PRODUCT_TYPE_NAME_IS_REQUIRED: 'Product Name Is Required',
+        ID_REQUIRED: 'Product type id is required',
     },
     FABRIC_TYPE: {
         FABRIC_TYPE_DELETED_SUCCESSFULLY: 'Fabric Type Deleted Successfully',

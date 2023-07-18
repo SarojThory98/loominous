@@ -19,4 +19,9 @@ export const SERVICE_MESSAGE = {
         SUCCESS: 'success',
         ERROR: 'error',
     },
+    PRODUCT: {
+        ALREADY_EXIST: 'exist',
+        SUCCESS: 'success',
+        ERROR: 'error',
+    },
 }

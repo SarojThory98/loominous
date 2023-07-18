@@ -9,6 +9,11 @@ import {isExistSupplierName} from '../../../../controllers/app/supplier/existSup
 import {getSupplierList, getSupplier} from '../../../../controllers/app/supplier/supplierListDetail.controller'
 import {updateSupplier} from '../../../../controllers/app/supplier/updateSupplier.controller'
 import {deleteSupplier} from '../../../../controllers/app/supplier/deleteSupplier.controller'
+import {addProductType} from '../../../../controllers/app/productType/addProductType.controller'
+import {isExistProductTypeName} from '../../../../controllers/app/productType/existProductType.controller'
+import {getProductList, getProduct} from '../../../../controllers/app/productType/productList.controller'
+import {updateProductType} from '../../../../controllers/app/productType/updateProductType.controller'
+import {deleteProductType} from '../../../../controllers/app/productType/deleteProductType.controller'
 
 class AdminRoutes implements RouteInterface {
     public Router = Router()
@@ -28,6 +33,12 @@ class AdminRoutes implements RouteInterface {
         this.Router.get('/admin/get-supplier-data/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, getSupplier)
         this.Router.patch('/admin/update-supplier-data/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, updateSupplier)
         this.Router.delete('/admin/delete-supplier/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, deleteSupplier)
+        this.Router.post('/admin/add-product', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, addProductType)
+        this.Router.post('/admin/check-productType-exist', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, isExistProductTypeName)
+        this.Router.get('/admin/get-productType-list', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, getProductList)
+        this.Router.get('/admin/get-productType-data/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, getProduct)
+        this.Router.patch('/admin/update-productType-data/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, updateProductType)
+        this.Router.delete('/admin/delete-productType/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, deleteProductType)
     }
 }
 
