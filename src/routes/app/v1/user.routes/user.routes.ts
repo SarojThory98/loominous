@@ -7,6 +7,7 @@ import {addUserProfile} from '../../../../controllers/app/user/userAddProfile.co
 import {updateUserProfile} from '../../../../controllers/app/user/updateUserProfile.controller'
 import {resetPassword} from '../../../../controllers/app/user/resetPassword.controller'
 import {AuthMiddleware} from '../../../../middlewares/verifyToken'
+import {logoutUser} from '../../../../controllers/app/auth/logout.controller'
 
 class UserRoutes implements RouteInterface {
     public Router = Router()
@@ -22,6 +23,7 @@ class UserRoutes implements RouteInterface {
         this.Router.post('/user-add-profile', addUserProfile)
         this.Router.patch('/user-update-profile', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyCustomer, updateUserProfile)
         this.Router.post('/user-reset-password', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyCustomer, resetPassword)
+        this.Router.post('/logout', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, logoutUser)
     }
 }
 

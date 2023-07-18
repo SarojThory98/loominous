@@ -43,6 +43,7 @@ export const API_MESSAGE = {
         INVALID_CREDENTIALS: 'Invalid Password',
         SIGNUP_SUCCESS: 'User account created successfully',
         LOGOUT: 'Logged out successfully',
+        LOGOUT_ERROR: 'Logout error',
         PASSWORD_UPDATED: 'Password updated successfully',
         PASSWORD_NOT_MATCH: 'Password do not match',
         PROFILE_INCOMPLETE: 'Please Complete Your Profile',
@@ -115,6 +116,9 @@ export const API_MESSAGE = {
         ORDER_STATUS_INCORRECT: 'Order Status Incorrect',
         ORDER_STATUS_NOT_UPDATED: 'Order Status Not Updated',
         ORDER_STATUS_UPDATED_SUCCESSFULLY: 'Order Status Updated Successfully',
+        ORDER_NOT_ADDED: "Order can't be added",
+        ORDER_EXIST_FOR_USER: 'Order is already exist for user',
+        ORDER_ID_REQUIRED: 'Order id is required',
     },
     USER: {
         COMPANY_ALREADY_EXIST: 'Company Name Already Exists',
@@ -133,5 +137,9 @@ export const API_MESSAGE = {
         TAG_NOT_UPDATED: 'Tag Not Updated',
         TAG_UPDATED_SUCCESSFULLY: 'Tag Updated Successfully',
         TAG_ALREADY_EXIST: 'Tag Name Already Exist',
+    },
+    ORDER_ITEM: {
+        ALREADY_EXIST: 'Order item already exist',
+        STATUS_SUCCSS: 'Order item status changed',
     },
 }
