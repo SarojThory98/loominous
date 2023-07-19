@@ -20,4 +20,10 @@ export const ORDERITEM_MODEL_KEYS = {
     STATUS: 'status',
     CURRENT_STATUS: 'currentStatus',
     FLAG: 'flag',
+    LENGTH: 'length',
+    WAIST: 'waist',
+    CHEST: 'chest',
+    PRODUCT_NAME: 'productName',
+    PRODUCT_ID: 'productId',
+    SUPPLIER_ID: 'supplierId',
 }

@@ -14,6 +14,7 @@ import {isExistProductTypeName} from '../../../../controllers/app/productType/ex
 import {getProductList, getProduct} from '../../../../controllers/app/productType/productList.controller'
 import {updateProductType} from '../../../../controllers/app/productType/updateProductType.controller'
 import {deleteProductType} from '../../../../controllers/app/productType/deleteProductType.controller'
+import {addCustomerOrder, viewCustomerOrder, updateOrder, listOrders, updateSKUOrderStatus} from '@/controllers/app/order/index.order.controller'
 
 class AdminRoutes implements RouteInterface {
     public Router = Router()
@@ -39,6 +40,11 @@ class AdminRoutes implements RouteInterface {
         this.Router.get('/admin/get-productType-data/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, getProduct)
         this.Router.patch('/admin/update-productType-data/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, updateProductType)
         this.Router.delete('/admin/delete-productType/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, deleteProductType)
+        this.Router.post('/admin/add/customerOrder', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, addCustomerOrder)
+        this.Router.get('/admin/view/customerOrder/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, viewCustomerOrder)
+        this.Router.patch('/admin/update/customerOrder/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, updateOrder)
+        this.Router.get('/admin/view/allOrders', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, listOrders)
+        this.Router.patch('/admin/update/skuOrder/status/:id', this.AuthMiddleware.authMiddleware, this.VerifyRole.verifyAdmin, updateSKUOrderStatus)
     }
 }
 

@@ -24,4 +24,9 @@ export const SERVICE_MESSAGE = {
         SUCCESS: 'success',
         ERROR: 'error',
     },
+    ORDER: {
+        ALREADY_EXIST: 'exist',
+        SUCCESS: 'success',
+        ERROR: 'error',
+    },
 }
