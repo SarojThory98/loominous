@@ -3,23 +3,22 @@ import ApiResponse from '../../../utils/api/api-respnse-handler.utils'
 import {API_RES_CODE} from '../../../constants/api_res_code/api.res.code'
 import {API_MESSAGE} from '../../../messages/api/api-res.messages'
 import {OrderService} from '../../../services/app/order/index.order.service'
-import OrderValidations from '../../../validations/app/v1/order/index.order.validation'
 import {PAGINATION} from '../../../constants/models/pagination/pagination'
 const API_RESPONSE = new ApiResponse()
-const Order_OrderItemValidation = new OrderValidations()
+import {orderValidation, skuOrderStatusUpdateValidation} from '../../../validations/app/v1/order/order.validation'
 const OrderServices = new OrderService()
 const addCustomerOrder = async (req: Request, res: Response) => {
     try {
-        const validation = await Order_OrderItemValidation.orderValidation({
+        const validateResult = await orderValidation({
             body: req.body,
         })
 
-        if (validation && validation.error) {
+        if (validateResult && validateResult.error) {
             return API_RESPONSE.ErrorJsonResponse({
                 res,
-                code: API_RES_CODE.UNPROCESSIBLE_ENTITY,
-                message: validation?.message || API_MESSAGE.UNPROCESSIBLE_ENTITY,
-                data: {validation},
+                code: API_RES_CODE.INVALID_INPUT,
+                message: API_MESSAGE.VALIDATION_ERROR,
+                data: {validateResult},
             })
         }
 
@@ -79,16 +78,15 @@ const viewCustomerOrder = async (req: Request, res: Response) => {
 
 const updateOrder = async (req: Request, res: Response) => {
     try {
-        const validation = await Order_OrderItemValidation.orderValidation({
+        const validateResult = await orderValidation({
             body: req.body,
         })
-
-        if (validation && validation.error) {
+        if (validateResult && validateResult.error) {
             return API_RESPONSE.ErrorJsonResponse({
                 res,
-                code: API_RES_CODE.UNPROCESSIBLE_ENTITY,
-                message: validation?.message || API_MESSAGE.UNPROCESSIBLE_ENTITY,
-                data: {validation},
+                code: API_RES_CODE.INVALID_INPUT,
+                message: API_MESSAGE.VALIDATION_ERROR,
+                data: {validateResult},
             })
         }
         const orderId = req.params.orderId
@@ -152,16 +150,16 @@ const listOrders = async (req: Request, res: Response) => {
 
 const updateSKUOrderStatus = async (req: Request, res: Response) => {
     try {
-        const validation = await Order_OrderItemValidation.orderStatusUpdateValidation({
+        const validateResult = await skuOrderStatusUpdateValidation({
             body: req.body,
         })
 
-        if (validation && validation.error) {
+        if (validateResult && validateResult.error) {
             return API_RESPONSE.ErrorJsonResponse({
                 res,
-                code: API_RES_CODE.UNPROCESSIBLE_ENTITY,
-                message: validation?.message || API_MESSAGE.UNPROCESSIBLE_ENTITY,
-                data: {validation},
+                code: API_RES_CODE.INVALID_INPUT,
+                message: API_MESSAGE.VALIDATION_ERROR,
+                data: {validateResult},
             })
         }
         const skuOrderId = req.params.id
